@@ -1,8 +1,8 @@
-import { Entity,PrimaryGeneratedColumn,Column, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToMany } from "typeorm";
 import { taskEntity } from "./task.entity";
 
-@Entity ('task_type_master')
-export class tasktypeEntity{
+@Entity('job_type_master')
+export class jobtypeEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -13,7 +13,7 @@ export class tasktypeEntity{
     is_active!: Number;
 
     @JoinColumn()
-    @OneToMany(()=>taskEntity,(taskEntity)=>taskEntity.id)
+    @OneToMany(() => taskEntity, (taskEntity) => taskEntity.id)
     tasks!: taskEntity;
 }
 

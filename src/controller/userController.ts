@@ -7,7 +7,7 @@ export class userController {
     public async getUser(req: any, res: any) {
         try {
             const userRepositry = AppDataSource.getRepository(users)
-            const userdata = await userRepositry.find()
+            const userdata = await userRepositry.find({where:{is_active:1}})
             return res.status(200).send(userdata)
         } catch (error) {
             return res.status(500).send("internal server error")
@@ -15,9 +15,12 @@ export class userController {
     }
     public async getuserid(req: any, res: any) {
         try {
-            const id = req?.params?.id
+            const id = {
+               id: req?.params?.id,
+               is_acttive:1
+            }
             const userRepositry = AppDataSource.getRepository(users)
-            const userdata = await userRepositry.findOneBy({ id })
+            const userdata = await userRepositry.findOneBy( id )
             return res.status(200).send(userdata)
         } catch (error) {
             return res.status(500).send("internal server error")
@@ -54,33 +57,33 @@ export class userController {
 
         try {
 
-        const userId = req?.params?.id
+            const userId = req?.params?.id
 
-        const userRepository = AppDataSource.getRepository(users)
-        const userDetail = await userRepository.findOne({ where: { id: userId }})
-        if (!userDetail) {
-            throw error('ERRORRRRR!!!! AEEEEEE');
-        }
-        if (userDetail['is_active'] == 0) {
-            throw error('ERRORRRRR!!!! AEEEEEE');
-        } 
-        
-        const UsersData = {
-            name:req?.body?.name,
-            mobile:req?.body?.mobile,
-            email:req?.body?.email,
-            age:req?.body?.age,
-            designation_id:req?.body?.designation_id
-        }
-            
+            const userRepository = AppDataSource.getRepository(users)
+            const userDetail = await userRepository.findOne({ where: { id: userId } })
+            if (!userDetail) {
+                throw error('ERRORRRRR!!!! AEEEEEE');
+            }
+            if (userDetail['is_active'] == 0) {
+                throw error('ERRORRRRR!!!! AEEEEEE');
+            }
+
+            const UsersData = {
+                name: req?.body?.name,
+                mobile: req?.body?.mobile,
+                email: req?.body?.email,
+                age: req?.body?.age,
+                designation_id: req?.body?.designation_id
+            }
 
             const user = userRepository.merge(userDetail, UsersData)
 
             const updateUser = userRepository.save(user)
+
             return res.status(200).send(updateUser);
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ error: "Error!!" });
+             return res.status(500).send("Internal server error");
         }
 
     }
@@ -119,18 +122,18 @@ export class userController {
             return res.status(500).send("Internal server error");
         }
     }
-    public async softdelete(req:any,res:any){
+    public async softdelete(req: any, res: any) {
         try {
-            const userId =req?.params?.id 
-            const {is_active} = req?.body
+            const userId = req?.params?.id
+            const { is_active } = req?.body
             const userRepositry = AppDataSource.getRepository(users);
 
-            const userDetail = await userRepositry.findOne({ where: { id: userId }})
+            const userDetail = await userRepositry.findOne({ where: { id: userId } })
 
             if (!userDetail) {
                 throw error('ERRORRRRR!!!! AEEEEEE')
             }
-            
+
             userDetail['is_active'] = is_active
 
             const userStatus = await userRepositry.save(userDetail)

@@ -1,12 +1,11 @@
 
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
 import { users } from './user.entity';
-import { taskStatusEntity } from './taskStatus.entity';
+import { jobStatusEntity } from './jobSatus.entity';
 import { jobtypeEntity } from './jobType.entity';
-import { jobEntity } from './job.entity';
 
-@Entity('task')
-export class taskEntity {
+@Entity('job')
+export class jobEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -17,27 +16,24 @@ export class taskEntity {
     user_id!: number;
 
     @Column()
-    task_status_id!: number;
+    job_status_id!: number;
+
+    @Column()
+    job_type_id!: number;
 
     @Column()
     is_active!: Number
-
-    @Column()
-    job_id!:number;
 
     @ManyToOne(() => users)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     users!: users;
 
-    @ManyToOne(() => taskStatusEntity)
-    @JoinColumn({ name: ' task_status_id', referencedColumnName: 'id' })
-    taskStatus!: taskStatusEntity;
+    @ManyToOne(() => jobEntity)
+    @JoinColumn({ name: 'job_status_id', referencedColumnName: 'id' })
+    jobStatus!: jobStatusEntity;
 
     @ManyToOne(() => jobtypeEntity)
     @JoinColumn({ name: 'job_type_id', referencedColumnName: 'id' })
     jobType!: jobtypeEntity;
 
-    @ManyToOne(()=>jobEntity)
-    @JoinColumn({name:"job_id",referencedColumnName:"id"})
-    job!:jobEntity;
 }
