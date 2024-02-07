@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import mainRoutes from "./routes/mainRoute"
 
 const app = express();
-const port = 4000;
+const port = 3000;
 
 
 AppDataSource.initialize()

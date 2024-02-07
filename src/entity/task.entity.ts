@@ -14,30 +14,25 @@ export class taskEntity {
     name!: string;
 
     @Column()
-    user_id!: number;
-
-    @Column()
-    task_status_id!: number;
-
-    @Column()
     is_active!: Number
-
-    @Column()
-    job_id!:number;
 
     @ManyToOne(() => users)
     @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-    users!: users;
+    @Column()
+    user_id!: number;
 
     @ManyToOne(() => taskStatusEntity)
     @JoinColumn({ name: ' task_status_id', referencedColumnName: 'id' })
-    taskStatus!: taskStatusEntity;
+    @Column()
+    task_status_id!: number;
 
     @ManyToOne(() => jobtypeEntity)
     @JoinColumn({ name: 'job_type_id', referencedColumnName: 'id' })
-    jobType!: jobtypeEntity;
+    @Column()
+    job_type_id!: number;
 
     @ManyToOne(()=>jobEntity)
     @JoinColumn({name:"job_id",referencedColumnName:"id"})
-    job!:jobEntity;
+    @Column()
+    job_id!:number;
 }

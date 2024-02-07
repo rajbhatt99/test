@@ -12,8 +12,9 @@ export class jobtypeEntity {
     @Column()
     is_active!: Number;
 
-    @JoinColumn()
-    @OneToMany(() => taskEntity, (taskEntity) => taskEntity.id)
-    tasks!: taskEntity;
+    @OneToMany(() => taskEntity,task=>task.id)
+    @JoinColumn({name:"task_id",referencedColumnName:"id"})
+    @Column()
+    task_id!: number;
 }
 

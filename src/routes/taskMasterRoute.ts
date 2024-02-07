@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { taskMasterController } from "../controller/taskMasterController";
 
-const taskMasterRoute = Router()
+const TaskMasterRoute = Router()
 const TaskMaterController = new taskMasterController()
 
 
-taskMasterRoute.get("/list", TaskMaterController.gettaskMaster)
-taskMasterRoute.post("/addtask", TaskMaterController.addtaskMaster)
-taskMasterRoute.put("/updatetask/:id", TaskMaterController.updatetaskMaster)
-taskMasterRoute.put("/delete/:id", TaskMaterController.softdelete)
+TaskMasterRoute.get("/list", TaskMaterController.gettaskMaster)
+TaskMasterRoute.post("/addtask", TaskMaterController.addtaskMaster)
+TaskMasterRoute.put("/updatetask/:id", TaskMaterController.updatetaskMaster)
+TaskMasterRoute.put("/delete/:id", TaskMaterController.softdelete)
 
-export default taskMasterRoute
+export default TaskMasterRoute

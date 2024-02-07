@@ -6,7 +6,7 @@ import  designationRoute  from "../routes/designationRoute";
 import  taskStatusRoute  from "../routes/taskStatusRoute";
 import jobTypeRoute  from "../routes/jobTypeRoute";
 import taskRoute  from "../routes/taskRoute";
-import taskMaterRoute  from "../routes/taskMasterRoute";
+import TaskMasterRoute  from "../routes/taskMasterRoute";
 import jobRoute  from "../routes/jobRoute";
 import jobStatusMasterRoute from "../routes/jobStatusMasterRoute";
 
@@ -18,7 +18,7 @@ mainRoutes.use('/designation', designationRoute)
 mainRoutes.use('/taskStatus', taskStatusRoute)
 mainRoutes.use('/jobType', jobTypeRoute)
 mainRoutes.use('/task', taskRoute)
-mainRoutes.use('/taskMaster', taskMaterRoute)
+mainRoutes.use('/taskMaster', TaskMasterRoute)
 mainRoutes.use('/job', jobRoute)
 mainRoutes.use('/jobStatusMasterRoute', jobStatusMasterRoute)
 

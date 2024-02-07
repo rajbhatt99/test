@@ -13,9 +13,8 @@ export class taskMasterEntity {
     @Column()
     is_active!: Number ;
 
-    @Column()
-    job_type_id!:number;
     @ManyToOne(()=>jobtypeEntity)
     @JoinColumn({name:"job_type_id",referencedColumnName:"id"})
-    jobtype!: jobtypeEntity;
+    @Column()
+    job_type_id!:number;
 }
